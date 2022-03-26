@@ -1,5 +1,6 @@
 //Recursive Solution
-
+// TC: O(2^M*N)
+// SC: O(Path Length) + O(2^M*N) path length = (m-1) + (n-1)
 class Solution {
     public int uniquePaths(int m, int n) {
         return uniquePathUtils(m-1, n-1);
@@ -14,7 +15,9 @@ class Solution {
     }
 }
 
-//Memoization
+//Memoization solution
+//TC: O(M*N)
+//SC: O(Path length) + O(M*N)
 
 class Solution {
     public int uniquePaths(int m, int n) {
