@@ -69,3 +69,37 @@ class Solution {
         return dp[m-1][n-1];
     }
 }
+
+//Space Optimized Soluyion
+//TC: O(M*N)
+//SC: O(N)
+class Solution {
+    public int uniquePaths(int m, int n) {
+        return uniquePathUtils(m, n);
+    }
+    
+    private int uniquePathUtils(int m, int n){
+        
+        int[] dp = new int[n];
+        Arrays.fill(dp, 0);
+        
+        for(int i=0;i<m;i++){
+                int[] temp = new int[n];
+                Arrays.fill(temp, 0);
+            for(int j=0; j<n;j++){
+                //base condition
+                  if(i==0 && j==0){
+                      temp[j]=1;
+                      continue;
+                  }
+                int top = 0;
+                int left = 0;
+                if(i>0) top = dp[j];
+                if(j>0) left = temp[j-1];
+                temp[j] = top + left;
+            }
+            dp = temp;
+        }
+        return dp[n-1];
+    }
+}
