@@ -56,3 +56,41 @@ class Solution {
         return dp[m-1][n-1];
     }
 }
+
+//Space Optimization
+// TC: O(M*N)
+//SC: O(M*N)
+class Solution {
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        
+        return minPathSumUtils(m, n, grid);
+    }
+    
+    private int minPathSumUtils(int m, int n, int[][] grid){
+        int[] dp = new int[n];
+        for(int i =0; i<m;i++){
+            int[] temp = new int[n];
+            //Arrays.fill(temp, 0);
+            for(int j=0;j< n; j++){
+                if(i==0 && j==0) temp[j] = grid[i][j];
+                else{
+                    int up = grid[i][j];
+                    if(i>0) up += dp[j];
+                    else up += (int)Math.pow(10,9);
+
+                    int left = grid[i][j];
+                    if(j>0) left+=temp[j-1];
+                    else left += (int)Math.pow(10,9);
+                    
+                    temp[j] = Math.min(up, left);
+                }
+            }
+            dp = temp;
+        }
+
+        return dp[n-1];
+    }
+}
