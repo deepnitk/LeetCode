@@ -70,3 +70,35 @@ class Solution {
     }
     
 }
+
+//Space Optimization
+//TC: O(N*N)
+//SC: O(N)
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        
+        return minimumTotalUtil(triangle);
+    }
+    
+    private int minimumTotalUtil(List<List<Integer>> triangle) {
+        
+        int m = triangle.size();
+        int[] front = new int[m];
+  
+        //Base case
+        for(int j=0;j<m;j++)
+            front[j] = triangle.get(m-1).get(j);
+      
+        for(int i=m-2;i>=0;i--){
+            int[] temp = new int[m];
+            for(int j = i; j>=0;j--){
+                int down = triangle.get(i).get(j) + front[j];
+                int diag = triangle.get(i).get(j) + front[j+1];
+                temp[j] = Math.min(down, diag);
+            }
+            front = temp;
+        }
+        return front[0];
+    }
+    
+}
