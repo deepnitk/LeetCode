@@ -115,3 +115,56 @@ class Solution {
     }
     
 }
+
+//Space Optimization
+//TC: O(N*M)
+//SC: O(N)
+//Reason: We are using an external array of size ‘N’ to store only one row
+
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+        return minFallingPathSumUtils(matrix);
+    }
+    
+    private int minFallingPathSumUtils(int[][] matrix){
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        int[] prev = new int[n];
+        Arrays.fill(prev, 0);
+        
+        for(int j=0;j<n;j++){
+            prev[j] = matrix[0][j];
+        }
+       
+
+        for(int i=1;i<m;i++){
+            int[] temp = new int[n];
+            
+            for(int j =0; j<n; j++){
+                int up = matrix[i][j] + prev[j];
+                
+                int leftDiagonal = matrix[i][j];
+                if(j-1>=0) leftDiagonal+= prev[j-1];
+                else leftDiagonal += (int)Math.pow(10,9);
+                
+                int rightDiagonal = matrix[i][j];
+                if(j+1< n) rightDiagonal += prev[j+1];
+                else rightDiagonal += (int)Math.pow(10,9);
+                
+                temp[j] = Math.min(up, Math.min(leftDiagonal, rightDiagonal));
+            }
+            prev = temp;
+        }
+        
+        int maxi = Integer.MAX_VALUE;
+        for(int j=0; j< n;j++){
+            int ans = prev[j];
+            maxi = Math.min(maxi, ans);
+        }
+
+        return maxi;
+        
+    }
+    
+}
