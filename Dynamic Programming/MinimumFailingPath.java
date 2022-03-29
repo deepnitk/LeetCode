@@ -31,7 +31,9 @@ class Solution {
 }
 
 //Memoization
-// TC: O(
+//TC: O(N*N)
+//SC: O(N) + O(N*M)
+//Reason: We are using a recursion stack space: O(N), where N is the path length and an external DP Array of size ‘N*M’.
 
 class Solution {
     public int minFallingPathSum(int[][] matrix) {
@@ -59,6 +61,56 @@ class Solution {
         int rd = matrix[i][j] + minFallingPathSumUtils(i-1, j+1, matrix, dp);
         
         return dp[i][j] = Math.min(s, Math.min(ld, rd));
+        
+    }
+    
+}
+
+//Tabulation solution
+//TC: O(N*M)
+//SC: O(N*M)
+//Reason: We are using an external array of size ‘N*M’. The stack space will be eliminated.
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+        return minFallingPathSumUtils(matrix);
+    }
+    
+    private int minFallingPathSumUtils(int[][] matrix){
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        int[][] dp = new int[m][n];
+        for(int[] arr: dp)
+            Arrays.fill(arr, 0);
+        
+        for(int j=0;j<n;j++){
+            dp[0][j] = matrix[0][j];
+        }
+       
+
+        for(int i=1;i<m;i++){
+            for(int j =0; j<n; j++){
+                int up = matrix[i][j] + dp[i-1][j];
+                
+                int leftDiagonal = matrix[i][j];
+                if(j-1>=0) leftDiagonal+= dp[i-1][j-1];
+                else leftDiagonal += (int)Math.pow(10,9);
+                
+                int rightDiagonal = matrix[i][j];
+                if(j+1< n) rightDiagonal += dp[i-1][j+1];
+                else rightDiagonal += (int)Math.pow(10,9);
+                
+                dp[i][j] = Math.min(up, Math.min(leftDiagonal, rightDiagonal));
+            }
+        }
+        
+        int maxi = Integer.MAX_VALUE;
+        for(int j=0; j< n;j++){
+            int ans = dp[m-1][j];
+            maxi = Math.min(maxi, ans);
+        }
+
+        return maxi;
         
     }
     
