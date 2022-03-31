@@ -49,11 +49,11 @@ class Solution {
         
         int dp[][][] = new int[m][n][n];
 
-    for (int row1[][]: dp) {
-      for (int row2[]: row1) {
-        Arrays.fill(row2, -1);
-      }
-    }
+        for (int row1[][]: dp) {
+          for (int row2[]: row1) {
+            Arrays.fill(row2, -1);
+          }
+        }
 
         return cherryPickupUtils(0, 0, n-1, m, n, grid, dp);  
     }
