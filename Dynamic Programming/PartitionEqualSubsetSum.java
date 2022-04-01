@@ -105,3 +105,50 @@ class Solution {
 
     }
 }
+
+//Space Optimization
+//Time Complexity: O(N*K) +O(N)
+//Space Complexity: O(K)
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int n = nums.length;
+        return canPartitionUtil(n, nums);
+    }
+    
+    private boolean canPartitionUtil(int n, int[] nums){
+        
+        int totalSum = 0;
+        for(int a:nums)
+            totalSum+=a;
+
+        if(totalSum%2 == 1) return false;
+        
+        else{
+            int k = totalSum/2;
+            
+            boolean[] prev = new boolean[k + 1];
+            prev[0] = true;
+                
+            if(nums[0]<=k)
+                prev[nums[0]] = true;
+
+            for(int idx = 1;idx<n;idx++){
+                boolean[] curr = new boolean[k+1];
+                curr[0] = true;
+                for(int target = 1; target<=k;target++){
+
+                    boolean notPick = prev[target];
+                    boolean pick = false;
+                    if(target>=nums[idx])
+                        pick = prev[target-nums[idx]];
+
+                    curr[target] = (pick || notPick);                
+                }
+                prev = curr;
+            }
+
+            return prev[k];
+        }
+
+    }
+}
