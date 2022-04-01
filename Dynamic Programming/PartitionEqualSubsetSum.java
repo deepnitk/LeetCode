@@ -27,7 +27,8 @@ class Solution {
 }
 
 //Memoization solution
-
+//Time Complexity: O(N*K) + O(N)
+//Space Complexity: O(N*K) + O(N)
 class Solution {
     public boolean canPartition(int[] nums) {
         int k = 0;
@@ -58,7 +59,8 @@ class Solution {
 }
 
 //Tabulation solution
-
+//Time Complexity: O(N*K) +O(N)
+//Space Complexity: O(N*K)
 class Solution {
     public boolean canPartition(int[] nums) {
         int n = nums.length;
