@@ -55,3 +55,47 @@ class Solution {
         return dp[idx][amount] = Math.min(pick , notPick);
     }
 }
+
+//Tablulation Approach
+// TC: O(N*T)
+// SC : O(N*T)
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int ans = coinChangeUtil(coins, amount);
+        if(ans >= (int)Math.pow(10,9)) return -1;
+        return ans;
+    }
+    
+    private int coinChangeUtil(int[] coins, int amount){
+        int n = coins.length;
+        int[][] dp = new int[n][amount+1];
+        for(int[] row:dp)
+            Arrays.fill(row, 0);
+        
+        // for(int i =0;i<=amount;i++){
+        //     if((amount % coins[0] == 0)) dp[0][i] = amount/coins[0];
+        // }
+        
+        for(int i=0; i<=amount; i++){
+            if(i%coins[0] == 0)  
+                dp[0][i] = i/coins[0];
+            else dp[0][i] = (int)Math.pow(10,9);
+    }
+        
+        for(int idx = 1; idx<n;idx++){
+            for(int amt =0;amt<=amount;amt++){
+                int notPick = 0 + dp[idx-1][amt];        
+                int pick = 0;
+                if(coins[idx]<=amt)
+                    pick = 1 + dp[idx][amt - coins[idx]];
+                else
+                    pick = (int)Math.pow(10,9);
+
+                dp[idx][amt] = Math.min(pick , notPick);
+            }
+        }
+        return dp[n-1][amount];
+    }
+        
+}
