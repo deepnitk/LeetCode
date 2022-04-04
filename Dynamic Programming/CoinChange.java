@@ -32,7 +32,9 @@ class Solution {
         int[][] dp = new int[coins.length][amount+1];
         for(int[] row:dp)
             Arrays.fill(row, -1);
-        return coinChangeUtil(coins.length-1, coins, amount, dp);
+        int ans = coinChangeUtil(coins.length-1, coins, amount, dp);
+        if(ans >= (int)Math.pow(10,9)) return -1;
+        return ans;
     }
     
     private int coinChangeUtil(int idx, int[] coins, int amount, int[][] dp){
