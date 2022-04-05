@@ -99,3 +99,49 @@ class Solution {
     }
         
 }
+
+//Space Optimization
+// TC: O(N*AMOUNT)
+// SC: O(AMOUNT)
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int ans = coinChangeUtil(coins, amount);
+        if(ans >= (int)Math.pow(10,9)) return -1;
+        return ans;
+    }
+    
+    private int coinChangeUtil(int[] coins, int amount){
+        int n = coins.length;
+        int[] prev = new int[amount+1];
+        int[] curr = new int[amount+1];
+        Arrays.fill(prev, 0);
+        Arrays.fill(curr, 0);
+        
+        // for(int i =0;i<=amount;i++){
+        //     if((amount % coins[0] == 0)) dp[0][i] = amount/coins[0];
+        // }
+        
+        for(int i=0; i<=amount; i++){
+            if(i%coins[0] == 0)  
+                prev[i] = i/coins[0];
+            else prev[i] = (int)Math.pow(10,9);
+    }
+        
+        for(int idx = 1; idx<n;idx++){
+            for(int amt =0;amt<=amount;amt++){
+                int notPick = 0 + prev[amt];        
+                int pick = 0;
+                if(coins[idx]<=amt)
+                    pick = 1 + curr[amt - coins[idx]];
+                else
+                    pick = (int)Math.pow(10,9);
+
+                curr[amt] = Math.min(pick , notPick);
+            }
+            prev = curr;
+        }
+        return prev[amount];
+    }
+        
+}
