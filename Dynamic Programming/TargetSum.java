@@ -132,3 +132,52 @@ class Solution {
     }
     
 }
+
+//Space Optimization
+
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        int totalSum = 0;
+        int s = 0;
+        
+        for(int num:nums)
+            totalSum+=num;
+        
+        //Checking for edge cases
+        if(totalSum-target<0) return 0;
+        if((totalSum-target)%2==1) return 0;
+        
+        s = (totalSum-target)/2;
+
+        return findTargetSumWaysUtils(nums, s);
+    }
+    
+    private int findTargetSumWaysUtils(int[] nums, int s){
+        
+        int n = nums.length;
+        int[] prev = new int[s+1];
+
+        //Base cases        
+        for(int sum=0;sum<=s;sum++){
+            if(sum==0 && nums[sum] == 0) prev[sum] = 2;
+            else if(sum==0 || sum == nums[0]) prev[sum]=1;
+            else prev[sum] = 0;
+        }
+        
+        for(int idx =1;idx<n;idx++){
+            int[] curr = new int[s+1];
+            for(int sum =0; sum<=s;sum++){
+                int notPick = prev[sum];
+                int pick = 0;
+                if(nums[idx]<=sum)
+                    pick += prev[sum-nums[idx]];
+
+                curr[sum] = pick + notPick;                
+            }
+            prev = curr;
+        }
+        
+        return prev[s];
+    }
+    
+}
