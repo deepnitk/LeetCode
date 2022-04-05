@@ -81,3 +81,54 @@ class Solution {
     }
     
 }
+
+//Tabulation solution
+//TC: O(N*K)
+// SC: O(N*K)
+
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        int totalSum = 0;
+        int s = 0;
+        
+        for(int num:nums)
+            totalSum+=num;
+        
+        //Checking for edge cases
+        if(totalSum-target<0) return 0;
+        if((totalSum-target)%2==1) return 0;
+        
+        s = (totalSum-target)/2;
+
+        return findTargetSumWaysUtils(nums, s);
+    }
+    
+    private int findTargetSumWaysUtils(int[] nums, int s){
+        
+        int n = nums.length;
+        int[][] dp = new int[n][s+1];
+        for(int[] row:dp)
+            Arrays.fill(row, 0);
+        
+        //Base cases        
+        for(int sum=0;sum<=s;sum++){
+            if(sum==0 && nums[sum] == 0) dp[0][sum] = 2;
+            else if(sum==0 || sum == nums[0]) dp[0][sum]=1;
+            else dp[0][sum] = 0;
+        }
+        
+        for(int idx =1;idx<n;idx++){
+            for(int sum =0; sum<=s;sum++){
+                int notPick = dp[idx-1][sum];
+                int pick = 0;
+                if(nums[idx]<=sum)
+                    pick += dp[idx-1][sum-nums[idx]];
+
+                dp[idx][sum] = pick + notPick;                
+            }
+        }
+        
+        return dp[n-1][s];
+    }
+    
+}
