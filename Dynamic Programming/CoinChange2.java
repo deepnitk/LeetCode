@@ -85,3 +85,41 @@ class Solution {
         return dp[n-1][amount];
     }
 }
+
+//Space Optimization
+//TC:O(N*T)
+//SC:O(T)
+
+class Solution {
+    public int change(int amount, int[] coins) {
+
+        
+        return changeUtils(coins, amount);
+    }
+    
+    private int changeUtils(int[] coins, int amount){
+        
+        int n = coins.length;
+        int[] prev = new int[amount+1];
+        Arrays.fill(prev, 0);
+        
+        for(int i=0;i<=amount;i++){
+            if(i%coins[0] == 0) prev[i] = 1;
+            else prev[i] = 0;
+        }
+        
+        for(int idx=1;idx<n;idx++){
+            int[] curr = new int[amount+1];
+            for(int amt=0;amt<=amount;amt++){
+                    int notPick = prev[amt];
+                    int pick = 0;
+                    if(coins[idx]<=amt) pick += curr[amt-coins[idx]];
+
+                    curr[amt] = pick+notPick;
+            }
+            prev = curr;
+        }
+        
+        return prev[amount];
+    }
+}
