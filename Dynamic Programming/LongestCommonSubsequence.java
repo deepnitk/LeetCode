@@ -61,6 +61,7 @@ class Solution {
     private int longestCommonSubsequenceUtil(String text1, String text2){
         int n = text1.length();
         int m = text2.length();
+        //Index shifting to accomodate base case...
         int[][] dp = new int[n+1][m+1];
         for(int[] row: dp)
             Arrays.fill(row, -1);
