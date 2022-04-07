@@ -86,3 +86,27 @@ class Solution {
         return dp[n][m];  
     }
 }
+
+//Space optimization
+//TC:O(N*M)
+//SC:O(M)
+int n = text1.length();
+        int m = text2.length();
+        int[] prev = new int[m+1];
+        int[] curr = new int[m+1];
+        
+        // Base Case is covered as we have initialized the prev and cur to 0.
+        
+        for(int idx1= 1;idx1<=n;idx1++){
+            for(int idx2=1;idx2<=m;idx2++){
+                //character match
+                if(text1.charAt(idx1-1) == text2.charAt(idx2-1)) 
+                    curr[idx2] = 1 + prev[idx2-1];
+
+                //character mismatch
+                else
+                    curr[idx2] = 0 + Math.max(prev[idx2], curr[idx2-1]);
+            }
+            prev = curr;
+        }
+        return prev[m];
