@@ -23,7 +23,7 @@ class Solution {
 
 //Memoization
 //TC:O(N*M)
-
+//OC: ASS
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         int n = text1.length();
@@ -46,5 +46,43 @@ class Solution {
         //character mismatch
         return dp[idx1][idx2] = 0 + Math.max(longestCommonSubsequenceUtil(idx1-1, idx2, text1,text2, dp), 
                             longestCommonSubsequenceUtil(idx1, idx2-1, text1,text2, dp));
+    }
+}
+
+//Tabulation approach
+//TC:O(N*M)
+//SC:O(N*M)
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        
+        return longestCommonSubsequenceUtil(text1, text2);
+    }
+    
+    private int longestCommonSubsequenceUtil(String text1, String text2){
+        int n = text1.length();
+        int m = text2.length();
+        int[][] dp = new int[n+1][m+1];
+        for(int[] row: dp)
+            Arrays.fill(row, -1);
+
+        for(int i=0;i<=n;i++){
+            dp[i][0] = 0;
+        }
+        for(int i=0;i<=m;i++){
+            dp[0][i] = 0;
+        }
+        
+        for(int idx1= 1;idx1<=n;idx1++){
+            for(int idx2=1;idx2<=m;idx2++){
+                //character match
+                if(text1.charAt(idx1-1) == text2.charAt(idx2-1)) 
+                    dp[idx1][idx2] = 1 + dp[idx1-1][idx2-1];
+
+                //character mismatch
+                else
+                    dp[idx1][idx2] = 0 + Math.max(dp[idx1-1][idx2], dp[idx1][idx2-1]);
+            }
+        }
+        return dp[n][m];  
     }
 }
