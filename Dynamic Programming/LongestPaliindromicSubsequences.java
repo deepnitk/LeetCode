@@ -1,4 +1,5 @@
 //Tabulation Solution
+//Extention of LCS problem. so we will get LCS of s and reverse(s)
 
 class Solution {
     public int longestPalindromeSubseq(String s) {
