@@ -1,5 +1,6 @@
 //Tabulation Solution
-
+//TC: O(N*M)
+//SC: O(N*M)
 
 class Solution {
     public int minInsertions(String s) {
@@ -36,5 +37,40 @@ class Solution {
             }
         }
         return dp[n][m];  
+    }
+}
+
+//Space Optimization
+//TC: O(N*M)
+//SC: O(M)
+
+class Solution {
+    public int minInsertions(String s) {
+        int n = s.length();
+        String t = s;
+        String ss=new StringBuilder(s).reverse().toString();
+        return n - longestCommonSubsequenceUtil(ss,t);
+    }
+    
+    private int longestCommonSubsequenceUtil(String text1, String text2){
+        int n = text1.length();
+        int m = text2.length();
+        
+        int[] prev=new int[m+1];
+        int[] curr=new int[m+1];
+        
+        for(int idx1= 1;idx1<=n;idx1++){
+            for(int idx2=1;idx2<=m;idx2++){
+                //character match
+                if(text1.charAt(idx1-1) == text2.charAt(idx2-1)) 
+                    curr[idx2] = 1 + prev[idx2-1];
+
+                //character mismatch
+                else
+                    curr[idx2] = 0 + Math.max(prev[idx2], curr[idx2-1]);
+            }
+            prev = (int[])(curr.clone());
+        }
+        return prev[m];  
     }
 }
