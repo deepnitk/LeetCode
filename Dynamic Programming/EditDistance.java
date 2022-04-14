@@ -97,3 +97,45 @@ class Solution {
         
     }
 }
+
+//Space Optimization
+//TC:O(N*M)
+//SC:O(M)
+class Solution {
+    public int minDistance(String word1, String word2) {
+        
+        return minDistanceUtils(word1, word2);
+    }
+    
+    private int minDistanceUtils(String s1, String s2){
+        
+        int n = s1.length();
+        int m = s2.length();
+        int[] prev = new int[m+1];
+        Arrays.fill(prev, 0);
+       
+       for(int i=0;i<=m;i++)
+           prev[i] =i;
+        
+        for(int i=1;i<=n;i++){
+            int[] curr = new int[m+1];
+            curr[0] = i;
+            for(int j=1;j<=m;j++){
+                if(s1.charAt(i-1) == s2.charAt(j-1)) 
+                    curr[j] = 0 + prev[j-1];
+                else{
+                    curr[j] = Math.min(
+                        1 + prev[j],
+                        Math.min(
+                            1 + curr[j-1],
+                            1 + prev[j-1]
+                        )
+                    );
+                }                
+            }
+            prev = curr;
+        }
+        return prev[m];
+        
+    }
+}
