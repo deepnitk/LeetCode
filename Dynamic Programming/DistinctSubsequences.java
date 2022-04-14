@@ -80,3 +80,32 @@ class Solution {
     }
 }
 
+//Space Optimization
+//TC: O(N*M)
+//SC: O(M)
+class Solution {
+    static int prime =(int)(Math.pow(10,9)+7);
+    public int numDistinct(String s, String t) {
+        
+        return numDistinctUtils(s, t);
+    }
+    
+    private int numDistinctUtils(String s1, String s2){
+        int n = s1.length();
+        int m = s2.length();
+        int[] dp = new int[m+1];
+        Arrays.fill(dp, 0);
+        dp[0] = 1;        
+        for(int i =1; i<=n;i++){
+            for(int j=m;j>=1;j--){
+                
+                if(s1.charAt(i-1) == s2.charAt(j-1))
+                    dp[j] = dp[j-1] + dp[j];
+                else
+                    dp[j] = dp[j];
+            }
+        }
+        return dp[m];
+    }
+}
+
