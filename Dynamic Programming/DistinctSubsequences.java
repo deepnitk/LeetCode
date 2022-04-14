@@ -64,6 +64,7 @@ class Solution {
         
         for(int i=0;i<=n;i++)
             dp[i][0] = 1;
+        //j will start from 1 otherwise it will override previous 0's column value.
         for(int j=1;j<=m;j++)
             dp[0][j] = 0;
         for(int i =1; i<=n;i++){
