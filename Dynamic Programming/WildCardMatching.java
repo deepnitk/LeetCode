@@ -5,7 +5,7 @@ class Solution {
     public boolean isMatch(String s, String p) {
         int n = s.length();
         int m = p.length();
-        return isMatchUtil(n-1,m-1,s,p);
+        return isMatchUtil(m-1,n-1,p,s);
     }
     
     private boolean isMatchUtil(int i, int j, String s1, String s2){
