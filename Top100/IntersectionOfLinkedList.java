@@ -34,17 +34,7 @@ public class Solution {
 //Dummy node at both head, in longer LL MOVE dummy node to l1-l2 pos
 //TC:O(2M)
 //SC:O(1)
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
+
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         int l1 = 0;
@@ -80,5 +70,19 @@ public class Solution {
             temp2=temp2.next;
         }
         return null;
+    }
+}
+
+//Optimal Solution
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null) return null;
+        ListNode a = headA, b = headB;
+        while(a!=b){
+            a = a == null ? headB : a.next;
+            b = b == null ? headA : b.next;
+        }
+        return a;
     }
 }
