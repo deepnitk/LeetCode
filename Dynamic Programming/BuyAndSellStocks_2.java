@@ -48,3 +48,39 @@ class Solution {
         return dp[idx][buy] = (int)profit;
     }
 }
+
+//Tabulation solution
+//TC:O(N*2)
+//SC:0(N*2)
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        return (int)maxProfitUtils(prices);
+    }
+    private int maxProfitUtils(int[] prices){
+        int n = prices.length;
+        int[][] dp = new int[n+1][2];
+        for(int[] row:dp)
+            Arrays.fill(row, 0);
+        //Base case
+        dp[n][0] = dp[n][1] = 0;
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=1;j++){
+                long profit = 0;
+                if(j == 1){
+                    profit = Math.max(-prices[i]+dp[i+1][0],
+                                     0 + dp[i+1][1]);
+                }
+                else{
+                    profit = Math.max(prices[i] + dp[i+1][1],
+                                     0 + dp[i+1][0]);
+                }
+                dp[i][j] = (int)profit;
+            }
+        }
+        return dp[0][1];
+
+    }
+}
