@@ -84,3 +84,41 @@ class Solution {
 
     }
 }
+
+//Space Optimization
+//TC:o(N*2)
+//SC:O(2)
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        return (int)maxProfitUtils(prices);
+    }
+    private int maxProfitUtils(int[] prices){
+        int n = prices.length;
+        int[] prev = new int[2];
+        Arrays.fill(prev, 0);
+        
+        int[] curr = new int[2];
+        Arrays.fill(curr, 0);
+        //Base case
+        prev[0] = prev[1] = 0;
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=1;j++){
+                long profit = 0;
+                if(j == 1){
+                    profit = Math.max(-prices[i]+prev[0],
+                                     0 + prev[1]);
+                }
+                else{
+                    profit = Math.max(prices[i] + prev[1],
+                                     0 + prev[0]);
+                }
+                curr[j] = (int)profit;
+            }
+            prev=curr;
+        }
+        return prev[1];
+
+    }
+}
