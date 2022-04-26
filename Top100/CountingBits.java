@@ -1,4 +1,4 @@
-//TC:O(N*C)
+//TC:O(N*Log(MAX))
 class Solution {
     public int[] countBits(int n) {
         int[] res = new int[n+1];
