@@ -156,3 +156,39 @@ class Solution {
 
     }
 }
+
+//Another Approach
+//TC:O(N*4)
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        int n = prices.length;
+        int[][] dp = new int[n][4];
+        for(int[] row: dp)
+            Arrays.fill(row, -1);
+        
+        return (int)maxProfitUtil(0,0, n,prices, dp);
+    }
+    
+    private int maxProfitUtil(int idx, int transaction, int n, int[] prices, int[][] dp){
+        
+        //Base Cases
+        //Transactions are like BUY, SELL, BUY,SELL
+        if(idx == n || transaction == 4) return 0;
+        
+        if(dp[idx][transaction]!=-1) return dp[idx][transaction];
+        
+        int profit = 0;
+        if(transaction%2==0){
+            dp[idx][transaction] = Math.max(-prices[idx] + maxProfitUtil(idx+1,transaction + 1,n,prices, dp),
+                             0+maxProfitUtil(idx+1,transaction,n,prices, dp));
+        }
+        else {
+            dp[idx][transaction] = Math.max(prices[idx] + maxProfitUtil(idx+1,transaction+1,n,prices, dp),
+                             0+maxProfitUtil(idx+1,transaction,n,prices, dp));
+        }
+        return dp[idx][transaction];
+
+    }
+}
