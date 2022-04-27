@@ -61,3 +61,56 @@ class Solution {
         return dp[idx][buy][cap];
     }
 }
+//Tabulation solution
+//TC:O(N*2*3)
+//SC:O(N*2*3)
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        return maxProfitUtil(prices);
+    }
+    
+    private int maxProfitUtil(int[] prices){
+        
+        int n = prices.length;
+        int[][][] dp = new int[n+1][2][3];
+        for (int[][] row : dp) {
+            for (int[] rowColumn : row) {
+                Arrays.fill(rowColumn, 0);
+            }
+        }
+        
+        //Base Cases
+        //1. completed 2 transactions
+        // if(cap==0) return 0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<=1;j++){
+                dp[i][j][0] = 0;
+            }
+        }
+        //2. reached end of prices array
+        // if(idx == n) return 0;
+        for(int j=0;j<=1;j++){
+            for(int k=0;k<=2;k++){
+                dp[n][j][k] = 0;
+            }
+        }
+        
+        for(int idx = n-1;idx>=0;idx--){
+            for(int buy =0;buy<=1;buy++){
+                for(int cap=1;cap<=2;cap++){
+                    if(buy==1){
+                        dp[idx][buy][cap] = Math.max(-prices[idx] + dp[idx+1][0][cap],
+                                                    0 + dp[idx+1][1][cap]);
+                    }
+                    else {
+                        dp[idx][buy][cap] = Math.max(prices[idx] + dp[idx+1][1][cap-1],
+                                                        0 + dp[idx+1][0][cap]);
+                    }
+                }
+            }
+        }
+        return dp[0][1][2];
+
+    }
+}
