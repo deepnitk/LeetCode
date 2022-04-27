@@ -115,7 +115,7 @@ class Solution {
     }
 }
 //Space Opmitimization
-//TC:O(2*3)
+//TC:O(N*2*3)
 //SC:O(2*3)
 class Solution {
     public int maxProfit(int[] prices) {
