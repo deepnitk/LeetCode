@@ -75,3 +75,25 @@ class Solution {
         return maxi;
     }
 }
+
+//TC:O(N)
+//SC:O(N)
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n =s.length();
+        //corner case
+        if(n==0) return 0;
+        int maxi = Integer.MIN_VALUE;
+        HashMap<Character,Integer> hm = new HashMap<>();
+        int  l=0, r=0; 
+        while(r<n){
+            char ch = s.charAt(r);
+            if(hm.containsKey(ch))
+                l = Math.max(hm.get(ch)+1, l);
+            hm.put(ch,r);
+            maxi = Math.max(maxi, r-l+1);
+            r++; 
+        }
+        return maxi;
+    }
+}
