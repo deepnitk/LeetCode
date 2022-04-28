@@ -43,3 +43,35 @@ class Solution {
         return maxi;
     }
 }
+
+//Optimal 1
+//TC:O(2N)
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n =s.length();
+        //corner case
+        if(n==0) return 0;
+        int maxi = Integer.MIN_VALUE;
+        HashSet<Character> hs = new HashSet<>();
+        int  l=0, r=0; 
+        while(r<n){
+            char ch = s.charAt(r);
+            if(!hs.contains(ch)){
+                hs.add(ch);
+                maxi = Math.max(maxi, r-l+1);
+                r++;
+            }
+            else {
+                while(hs.contains(ch)){
+                    char charToRemove = s.charAt(l);
+                    hs.remove(charToRemove);
+                    l++;
+                }
+                hs.add(ch);
+                maxi = Math.max(maxi, r-l+1);
+                r++; 
+            }
+        }
+        return maxi;
+    }
+}
