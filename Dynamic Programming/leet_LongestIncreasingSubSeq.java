@@ -121,7 +121,8 @@ class Solution {
 }
 
 //Best Optimised
-//TC:O(N)
+//TC:O(N2)
+//sc:o(n)
 class Solution {
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
