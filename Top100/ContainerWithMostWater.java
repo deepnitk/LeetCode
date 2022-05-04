@@ -21,3 +21,25 @@ class Solution {
         return maxi;
     }
 }
+
+//Two pointer approach
+//TC:O(N)
+class Solution {
+    public int maxArea(int[] height) {
+        int maxi = 0;
+        int ptr1 = 0;
+        int ptr2 = height.length-1;
+        while (ptr1 < ptr2) {
+            if (height[ptr1] < height[ptr2]){
+                maxi = Math.max(maxi, height[ptr1] * (ptr2-ptr1));
+                ptr1++;
+            }
+            else {
+                maxi = Math.max(maxi, height[ptr2] * (ptr2-ptr1));
+                ptr2--;
+                
+            }
+        }
+        return maxi;
+    }
+}
