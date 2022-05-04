@@ -1,6 +1,6 @@
 //Prefix Array solution
 //TC: O(N)
-//SC:O(1)
+//SC:2*O(N)
 
 class Solution {
     public int trap(int[] height) {
