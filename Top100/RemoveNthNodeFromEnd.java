@@ -8,7 +8,7 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-//TC:O(N)
+//TC:O(2N)
 
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -43,5 +43,42 @@ class Solution {
         }
         
         return head;
+    }
+}
+
+//Optimal
+//TC:O(N)
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next = head;
+        
+        ListNode slow = dummyNode;
+        ListNode fast = dummyNode;
+        
+        for(int i = 1;i<=n;i++){
+            fast=fast.next;
+        }
+        
+        while(fast.next!=null){
+            slow=slow.next;
+            fast= fast.next;
+        }
+        
+        slow.next = slow.next.next;
+        
+        
+        return dummyNode.next;
     }
 }
