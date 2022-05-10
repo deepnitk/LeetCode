@@ -24,7 +24,6 @@ class Solution {
                     triplet.add(nums[hm.get(nums[j])]);
                     triplet.add(nums[j]);
                     res.add(triplet);
-                    
                 }
                 else {
                     hm.put(newSum, j);
