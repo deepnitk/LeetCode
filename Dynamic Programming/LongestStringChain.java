@@ -1,4 +1,5 @@
 //Build on top of LIS solution
+//TC:O(N2*L)
 
 class Solution {
     
