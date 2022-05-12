@@ -1,3 +1,38 @@
+//Memoization solution
+//TC:O(N2)
+//SC:O(N2)
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][n+1];
+        
+        for(int[] row:dp){
+            Arrays.fill(row, -1);
+        }
+        return lengthOfLISUtils(nums, 0, -1, dp);
+    }
+    
+    public int lengthOfLISUtils(int[] nums, int idx, int prev_idx, int[][] dp) {
+        
+        if (idx == nums.length) {
+            return 0;
+        }
+        if (dp[idx][prev_idx+1] != -1) {
+           return  dp[idx][prev_idx+1];
+        }
+        int len = 0 + lengthOfLISUtils(nums, idx+1, prev_idx, dp);
+        
+        if(prev_idx == -1 || nums[idx] > nums[prev_idx]) {
+            len = Math.max(len, 1 +lengthOfLISUtils(nums, idx+1, idx, dp));
+        }
+        
+        return dp[idx][prev_idx+1] = len;
+        
+    }
+}
+
+
+//Tabulation solution
 //TC:O(N^2)
 //SC:O(N)
 class Solution {
