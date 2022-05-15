@@ -12,7 +12,7 @@ class MinStack {
     }
     
     public void push(int val) {
-        if(top>=MAX_SIZE) throw new RuntimeException("Stack is full");
+        if(top>=MAX_SIZE) throw new RuntimeException("Stack is full.");
         dataArray[++top] = val;
         if( minIndex == -1 || val<=minValueArray[minIndex]){
             minValueArray[++minIndex] = val;
