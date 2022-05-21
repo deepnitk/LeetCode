@@ -9,7 +9,7 @@ class Solution {
         return res;
     }
     
-    public void combinationSumUtils(int idx, int[] arr, int target, List<List<Integer>> res, List<Integer> ds){
+    public void combinationSumUtils(int idx, int[] arr, int target, List<List<Integer>> res, List<Integer> ds) {
         // Base case
         if(idx == arr.length){
             if(target == 0){
