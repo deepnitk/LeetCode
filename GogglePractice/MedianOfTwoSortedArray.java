@@ -31,12 +31,15 @@ class Solution {
                 j++;
         }
         if(oddLen) {
+            System.out.println("yes");
             return (double) res.get((m+n)/2);
         }
-        else{
-            int x = res.get((m+n)/2);
-            int y = res.get(((m+n)/2)+1);
-            return (double)((x+y)/2);
+        else {
+            double x = res.get((m+n)/2-1);
+            double y = res.get(((m+n)/2));
+            double ans = 0;
+            ans = (x+y)/2;
+            return ans;
         }
     }
 }
