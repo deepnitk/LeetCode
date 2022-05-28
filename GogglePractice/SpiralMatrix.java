@@ -19,11 +19,11 @@ class Solution {
 		if (!(left < right && top < bottom)) {
 			break;
 		}
-		for( int i = right-1; i>left-1; i--) {
+		for( int i = right-1; i>=left; i--) {
 			res.add(matrix[bottom - 1][i]);
 		}
 		bottom--;
-		for(int i = bottom-1; i>top-1; i--) {
+		for(int i = bottom-1; i>=top; i--) {
 			res.add(matrix[i][left]);
 		}
 		left++;
