@@ -1,4 +1,5 @@
-//TC: O(N)
+//Brute force
+//TC: O(nlogn)
 //SC: O(N)
 class Solution {
     public int[][] merge(int[][] intervals) {
