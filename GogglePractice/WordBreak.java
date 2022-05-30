@@ -52,6 +52,7 @@ class Solution {
 
 
 //DP solution
+//TC: o(n^2*m)
 class Solution {
 	public boolean wordBreak(String s, List<String> wordDict) {
 		int n = s.length();
