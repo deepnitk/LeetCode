@@ -1,5 +1,6 @@
 //TC:O(V+E)
 //SC:O(V+E)
+// DFS solution
 /*
 // Definition for a Node.
 class Node {
