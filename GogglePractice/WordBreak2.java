@@ -30,16 +30,24 @@ class Solution {
         root = new Node();
     }
     
-    public void wordBreakUtil(String s, StringBuilder sb, int pos, List<String> res) {
+    public void wordBreakUtil(String s, List<String> st, int pos, List<String> res) {
         if (pos == s.length()) {
+            StringBuilder sb = new StringBuilder();
+            for(String word: st){
+                sb.append(word);
+                sb.append(" ");
+            }
+            sb.deleteCharAt(sb.length() - 1);
             res.add(sb.toString());
             return;
         }
-        sb.append(" ");
+        
         for (int i = pos;i<s.length(); ++i) {
             if (search(s.substring(pos, i + 1))) {
-                System.out.println("cut: "+(i+1));
-               wordBreakUtil(s, sb.append(s.substring(pos, i + 1)), i+1, res); 
+
+                st.add(s.substring(pos, i + 1));
+                wordBreakUtil(s, st, i+1, res); 
+                st.remove(st.size() -1);
             }
         }
     }
@@ -50,13 +58,13 @@ class Solution {
         }
         List<String> res = new ArrayList<>();
         //Make Partition and check
-        
+        List<String> st = new ArrayList();
         for(int i = 0;i < s.length(); i++) {
             StringBuilder sb = new StringBuilder();
             if(search(s.substring(0, i+1))) {
-                System.out.println();
-                System.out.println("cut: "+(i+1));
-                wordBreakUtil(s, sb.append(s.substring(0, i+1)), i+1, res);
+                st.add(s.substring(0, i+1));
+                wordBreakUtil(s, st, i+1, res);
+                st.remove(st.size() - 1);
             }
         }
         return res;
