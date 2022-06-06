@@ -26,3 +26,28 @@ class Solution {
         return "";
     }
 }
+
+//Two pointer approach
+//TC: O(N2)
+
+class Solution {
+    public String shortestPalindrome(String s) {
+        // System.out.println("s: "+s);
+        int n = s.length();
+        int i = 0;
+        for(int j = n - 1; j >= 0; j--) {
+            if ( s.charAt(i) == s.charAt(j) ) {
+                i++;
+            }
+        }
+        if( i == n ) return s;
+        
+        StringBuilder res = new StringBuilder();
+        res.append(s.substring(i, n));
+        res.reverse();
+        res.append(shortestPalindrome(s.substring(0, i)));
+        res.append(s.substring(i));
+        return res.toString();
+
+    }
+}
