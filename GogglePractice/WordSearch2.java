@@ -1,5 +1,5 @@
 // Trie + DFS solution
-
+// TC: O(mn*4^s) s = length of longest string
 
 //Declare Trie Node...
 class TrieNode {
