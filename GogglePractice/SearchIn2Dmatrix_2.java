@@ -1,6 +1,8 @@
 //Awesome case 
 //represent 2d array in 1d fashion like res = (0 to m*n - 1)
 // r will be res/m and c will be res%n
+//tc : log(m*n)
+
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int n = matrix.length;
