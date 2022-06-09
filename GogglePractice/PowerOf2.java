@@ -15,3 +15,12 @@ class Solution {
         return count;
     }
 }
+
+//Shorter version
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        if ( n >= Integer.MAX_VALUE || n <= Integer.MIN_VALUE || n < 1)
+            return false;
+        return (n & (n - 1)) == 0 ? true : false;
+    }
+}
