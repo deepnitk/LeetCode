@@ -21,3 +21,17 @@ class Solution {
         return res;
     }
 }
+
+/*
+Other variant of problemn
+1. value of (5,3)th element of pascal's Trianage
+    answer = r-1 (C) c-1
+2. return nth row of pascal's triangle
+    need to calculate  nCr for n elements and store
+    Optimization:
+        for(int i = 0; i< k; i++) {
+            res *= (n - i);
+            res /= (i + 1);
+            
+        }
+*/        
