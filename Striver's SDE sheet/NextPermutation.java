@@ -3,6 +3,7 @@ class Solution {
         int n = nums.length;
         
         int i = n - 2;
+	    //first dip
         while (i >= 0 && nums[i] >= nums[i+1]) {
             i --;
         }
