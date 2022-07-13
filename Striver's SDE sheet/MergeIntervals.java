@@ -1,4 +1,4 @@
-//TC: O(N^2)
+//TC: O(NlogN) + O(N)
 class Solution {
     public int[][] merge(int[][] intervals) {
         ArrayList<int[]> res  = new ArrayList<>();
