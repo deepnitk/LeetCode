@@ -1,4 +1,5 @@
 //Binary search on 2d matrix logic
+// TC: O(log(m*n)
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int m = matrix.length;
