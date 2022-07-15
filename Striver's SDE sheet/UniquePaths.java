@@ -1,5 +1,6 @@
 //Brute force Recursive solution
-//TC: 
+//TC: exponential 2^m*n
+// SC: exponential
 
 class Solution {
     public int uniquePaths(int m, int n) {
