@@ -44,3 +44,21 @@ class Solution {
         else return dp[i][j] = uniquePathsUtils(i + 1, j, m, n, dp) + uniquePathsUtils(i, j + 1, m, n, dp);
     }
 }
+
+//Optimal solution
+//Combinatorics
+//TC: O(M-1) OR O(N-1)
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int N = m + n -2;
+        int R = m -1;
+        double res = 1;
+        for(int i = 1; i <= R; i++){
+            res = res *(N - R + i)/i;
+        }
+        return (int)res;
+    }
+    
+}
+
+        if(dp[i][j] != -1) {
