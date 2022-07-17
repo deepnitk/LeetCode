@@ -62,7 +62,8 @@ class Solution {
 }
 
 //Optimal solution with extra space
-
+//TC: o(n1 + n2)
+//sc:O(1)
 
 /**
  * Definition for singly-linked list.
