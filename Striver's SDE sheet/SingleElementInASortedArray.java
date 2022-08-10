@@ -22,6 +22,8 @@ class Solution {
         int low = 0, high = nums.length - 2;
         while (low <= high) {
             int mid = (low + high) >> 1;
+            // oddIndex ^ 1 = oddIndex  - 1
+            // evenIndex ^ 1 = evenIndex + 1
             if (nums[mid] == nums[mid^1]) {
                 low = mid + 1;
             }
