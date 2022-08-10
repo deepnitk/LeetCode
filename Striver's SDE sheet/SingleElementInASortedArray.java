@@ -12,6 +12,11 @@ class Solution {
 }
 
 //Binary search
+/*
+In order to check left half
+1st instance -- even index
+2nd instance -- odd index
+*/
 class Solution {
     public int singleNonDuplicate(int[] nums) {
         int low = 0, high = nums.length - 2;
